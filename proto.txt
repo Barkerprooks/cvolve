@@ -1,0 +1,33 @@
+gene: 16-bit number
+
+1 bit for in type  (2 vals)
+1 bit for out type (2 vals)
+3 bits for in index (7 possible inputs)
+3 bits for out index (7 possible outputs)
+8 bits for strength (256 possible values [convert to double])
+  - need to multiply 0.015625 by the value to get true strength value
+
+reproduction:
+split each genome in half (genome should always be even)
+0.001 chance for mutation (or cross over)
+
+brain:
+  max 8 inputs -> max 4 inner -> max 8 outputs
+  inputs:
+    - crowded
+    - close to left
+    - close to right
+    - close to top
+    - close to bottom
+    - [n/a]
+    - [n/a]
+    - [n/a]
+  output:
+    - move random
+    - move left
+    - move right
+    - move up
+    - move down
+    - [n/a]
+    - [n/a]
+    - [n/a]
