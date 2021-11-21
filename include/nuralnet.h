@@ -22,8 +22,7 @@ typedef struct
 nnetlink_t trascribe_gene(uint16_t);
 nuralnet_t create_new_brain(size_t, size_t, uint16_t *, size_t);
 
-void pulse(nuralnet_t *, nnetlink_t);
-
+void pulse(nuralnet_t *);
 void brain_info(nuralnet_t);
 
 #endif

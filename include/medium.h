@@ -26,7 +26,9 @@ typedef struct
 agent_t create_new_agent(uint16_t *, size_t, vec2d_t);
 medium_t create_medium(size_t, size_t, uint16_t **, size_t, size_t);
 
+void update_inputs(medium_t *, size_t, size_t);
 void update_medium(medium_t *, size_t, size_t);
+
 void output_medium(medium_t, size_t, size_t);
 
 void unalloc_medium(medium_t *);

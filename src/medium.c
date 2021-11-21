@@ -32,6 +32,53 @@ medium_t create_medium(size_t w, size_t h, uint16_t **pool, size_t n, size_t g)
   return medium;
 }
 
+void update_inputs(medium_t *medium, size_t w, size_t h)
+{
+  vec2d_t v;
+  agent_t *a;
+  double c;
+
+  for(int i = 0; i < medium->living; i++)
+  {
+    c = 0;
+    v = medium->alive[i];
+    a = &(medium->field[v.x + w * v.y]);
+
+    for(int vy = v.y - 1; vy < v.y + 1; vy++)
+    {
+      for(int vx = v.x - 1; vx < v.x + 1; vx++)
+      {
+        if(vy > 0 && vy < h && vx > 0 && vx < w && vy != v.y && vx != v.x)
+        {
+          if(medium->field[vx + w * vy].genome)
+            c++;
+        }
+      }
+    }
+
+    a->brain.input[0] = c / 8.0f;
+    a->brain.input[1] = (double) v.x / (double) w;
+    a->brain.input[2] = (double) (w - v.x) / (double) w;
+    a->brain.input[3] = (double) (h - v.y) / (double) h;
+    a->brain.input[4] = (double) v.y / (double) h;
+  }
+}
+
+void update_medium(medium_t *medium, size_t w, size_t h)
+{
+  vec2d_t v;
+  agent_t *a;
+
+  for(int i = 0; i < medium->living; i++)
+  {
+    v = medium->alive[i];
+    a = &(medium->field[v.x + w * v.y]);
+
+    a->position.x += a->brain.outputs[1];
+  }
+
+}
+
 void output_medium(medium_t medium, size_t w, size_t h)
 {
   agent_t cell;

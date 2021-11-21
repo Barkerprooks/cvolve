@@ -4,7 +4,7 @@
 
 #define W 50
 #define H 25
-#define N 25
+#define N 500
 #define G 8
 
 int main(void)
@@ -20,13 +20,16 @@ int main(void)
   // we generated
   medium_t grid = create_medium(W, H, pool, N, G);
 
+  update_inputs(&grid, W, H);
+  update_medium(&grid, W, H);
+
   output_medium(grid, W, H);
 
   vec2d_t v = grid.alive[0];
   agent_t a = grid.field[v.x + W * v.y];
 
   brain_info(a.brain);
-  pulse(&(a.brain), a.brain.connect[0]);  
+  pulse(&(a.brain));  
   brain_info(a.brain);
 
   unalloc_genes(pool, N);

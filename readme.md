@@ -1,4 +1,4 @@
-# C\_Volve
+# C\_Volve - v0.0.2
 An evolutionary nural net in the C language
 
 # How to Build

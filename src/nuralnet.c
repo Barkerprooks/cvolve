@@ -36,14 +36,18 @@ nuralnet_t create_new_brain(size_t x, size_t y, uint16_t *genome, size_t g)
   return brain;
 }
 
-void pulse(nuralnet_t *brain, nnetlink_t link)
-{
-  double value = link.i ? brain->input[link.i % 5] : brain->inner[link.ii % 4];
-  if(link.o)
-    brain->inner[link.oi % 4] = 1 / (value * link.s);
-  else
-    brain->outputs[link.oi % 5] = 1 / (value * link.s);
 
+
+void pulse(nuralnet_t *brain)
+{
+  nnetlink_t link;
+  double value;
+  
+  for(int i = 0; i < brain->connections; i++)
+  {
+    link = brain->connect[i];
+    value += link.s;
+  }
 }
 
 void brain_info(nuralnet_t brain)
